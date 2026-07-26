@@ -16,5 +16,5 @@ class MoodEntry(models.Model):
     data_created = models.DateTimeField(auto_now_add=True)
       
     def __str__(self):
-        return f"{self.data_created.strFtime('%Y-%m-%d')}-{self.get_rating_display()}"
+        return f"{self.data_created.strftime('%Y-%m-%d')}-{self.get_rating_display()}"
     
