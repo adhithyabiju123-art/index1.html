@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w_3ssi-6dri7ucvwvqx^m(=$68f6zssu!9d7&jlacr-y)ja114
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["your-render-url.onrender.com"]
 
 
 # Application definition
@@ -120,3 +120,4 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL = '/tracker/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
