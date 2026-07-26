@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tracker.views import dashboard
+from django.contrib.auth import views as auth_views
+from tracker.views import dashboard, register  # <-- Make sure 'register' is imported!
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', dashboard, name='dashboard'),
+    
+    path('', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('register/', register, name='register'),  # <-- Make sure this line exists!
+    path('dashboard/', dashboard, name='dashboard'),
 ]

@@ -1,17 +1,153 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        <h2>Mood Tracker Login</h2>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Mood Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #7b1fa2, #2196f3);
+        }
 
-            <button type="submit"> Login</button>
-        </form>
+        .login-box {
+            width: 380px;
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
 
-    </body>
+        .login-box h1 {
+            color: #1e62d0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="password"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* Show Password Checkbox Style */
+        .show-password-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 20px 0;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .show-password-container input[type="checkbox"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #1e62d0;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1852b0;
+        }
+
+        .signup-link {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #1e62d0;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h1>Login</h1>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div style="color: #2e7d32; background: #e8f5e9; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 14px;">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="input-group">
+            <label for="id_username">Username</label>
+            <input type="text" name="username" id="id_username" required>
+        </div>
+
+        <div class="input-group">
+            <label for="id_password">Password</label>
+            <input type="password" name="password" id="id_password" required>
+        </div>
+
+        <!-- Show Password Checkbox -->
+        <label class="show-password-container">
+            <input type="checkbox" id="togglePassword"> Show Password
+        </label>
+
+        <button type="submit">Log In</button>
+    </form>
+
+    <div class="signup-link">
+        Don't have an account? <a href="{% url 'register' %}">Sign Up</a>
+    </div>
+</div>
+
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('id_password');
+
+    togglePassword.addEventListener('change', function() {
+        // Toggle input type between 'password' and 'text'
+        passwordInput.type = this.checked ? 'text' : 'password';
+    });
+</script>
+
+</body>
 </html>
